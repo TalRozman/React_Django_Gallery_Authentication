@@ -1,6 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import gallerySlice from '../features/gallery/gallerySlice';
 import loginSlice from '../features/Login/loginSlice';
+import profileSlice from '../features/Profile/registerSlice';
 import registerSlice from '../features/Register/registerSlice';
 
 
@@ -9,6 +10,7 @@ export const store = configureStore({
     gallery: gallerySlice,
     login:loginSlice,
     register:registerSlice,
+    profile:profileSlice,
   },
 });
 

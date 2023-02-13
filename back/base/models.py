@@ -11,3 +11,12 @@ class Gallery(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
+    phoneNum = models.CharField(max_length=10)
+    address = models.CharField(max_length=500)
+    birthDate = models.DateField(null=True,blank=True)
+
+    def __str__(self):
+        return self.user.first_name

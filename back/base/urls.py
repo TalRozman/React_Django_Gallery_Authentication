@@ -22,5 +22,7 @@ urlpatterns = [
     path('gallery/',views.MygalleryView.as_view()),
     path('gallery/<id>',views.MygalleryView.as_view()),
     path('users/<pk>',views.MyUsersView.as_view()),
-    path('register/',views.register,name="register"),
+    path('register/',views.register),
+    path('profile/',views.MyProfileView.as_view()),
+    path('profile/<user_id>',views.MyProfileView.as_view()),
 ]

@@ -1,11 +1,7 @@
 import os
-from .serializers import MyTokenObtainPairSerializer,GallerySerializer,UserSerializer
-from .models import Gallery
+from .serializers import MyTokenObtainPairSerializer,GallerySerializer,UserSerializer,ProfileSerializer
+from .models import Gallery,Profile
 from django.contrib.auth.models import User
-
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login ,logout
-from django.contrib.auth.hashers import make_password
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view,permission_classes
@@ -97,3 +93,28 @@ class MyUsersView(APIView):
         my_model = usr.User_set.get(pk=pk)
         my_model.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+@permission_classes([IsAuthenticated])
+class MyProfileView(APIView):
+    def get(self,request,user_id):
+        try:
+            myModel = Profile.objects.get(user_id=user_id)
+        except Profile.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serailizer = ProfileSerializer(myModel,many=False)
+        return Response(serailizer.data)
+    
+    def post(self,request):
+        serializer = ProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)        
+
+    def put(self, request, user_id):
+        my_model = Profile.objects.get(user_id=user_id)
+        serializer = ProfileSerializer(my_model, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
