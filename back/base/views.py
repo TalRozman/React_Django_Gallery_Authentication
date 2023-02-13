@@ -61,16 +61,18 @@ class MygalleryView(APIView):
             
 @api_view(["POST"])
 def register(request):
-    form = UserCreationForm(request.data)
-    if form.is_valid():
-        form.save()
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password1']
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        return Response(status=status.HTTP_201_CREATED)
-    else:
-        return Response(form.errors,status=status.HTTP_400_BAD_REQUEST)
+    user = User.objects.create_user(
+                username=request.data['username'],
+                email=request.data['email'],
+                password=request.data['password'],
+                first_name = request.data['first_name'],
+                last_name = request.data['last_name']
+                )
+    user.is_active = True
+    user.is_staff = True
+    user.save()
+    return Response(status=status.HTTP_201_CREATED)
+
 
 @permission_classes([IsAuthenticated])
 class MyUsersView(APIView):

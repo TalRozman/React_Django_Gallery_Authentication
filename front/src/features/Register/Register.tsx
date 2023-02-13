@@ -1,39 +1,76 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import IRegisterUser from '../../models/register';
-import { registerAsync, selectRegisterError } from './registerSlice';
+import { registerAsync, restStatus, selectStatus } from './registerSlice';
 import { useNavigate } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Register = () => {
   const dispatch = useAppDispatch()
   const [username, setusername] = useState("")
-  const [password1, setpassword1] = useState("")
-  const [password2, setpassword2] = useState("")
-  const error = useAppSelector(selectRegisterError)
+  const [email, setemail] = useState("")
+  const [password, setpassword] = useState("")
+  const [first_name, setfirstName] = useState("")
+  const [last_name, setlast_name] = useState("")
+  const status = useAppSelector(selectStatus);
   const navigate = useNavigate()
 
-  const handleRegister=()=>
+  const handleRegister = async() => {
+    const usr: IRegisterUser = { username, email, password, first_name, last_name }
+    await dispatch(registerAsync(usr))
+  }  
+
+  useEffect(() => {
+    if (status === 'success'){
+      handleSuccess()
+    }
+  }, [status])
+  
+  const handleSuccess = ()=>
   {
-    const usr:IRegisterUser = {username,password1,password2}
-    dispatch(registerAsync(usr))
+    toast.success('User added successfully!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "colored",
+    });
+    setTimeout(() => {
+      navigate('/')
+      dispatch(restStatus())
+    }, 3000);
   }
+
   return (
-    <div style={{display: 'block',marginLeft: 'auto',marginRight: 'auto',width: '40%',textAlign:'center',padding: '25% 0',}}>
-      <form onSubmit={(e)=>{handleRegister();e.preventDefault()}}>
+    <div style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '40%', textAlign: 'center', padding: '25% 0', }}>
+      <ToastContainer/>
+      <form onSubmit={(e) => { handleRegister(); e.preventDefault() }}>
         <label>
           User name:
-          <input onKeyUp={(e) => setusername(e.currentTarget.value)} />
-        </label><br/>
+          <input onKeyUp={(e) => setusername(e.currentTarget.value)} required />
+        </label><br />
+        <label>
+          Email:
+          <input type={'email'} onKeyUp={(e) => setemail(e.currentTarget.value)} required />
+        </label><br />
         <label>
           Password:
-          <input type={'password'} onKeyUp={(e) => setpassword1(e.currentTarget.value)} />
-        </label><br/>
+          <input type={'password'} onKeyUp={(e) => setpassword(e.currentTarget.value)} required />
+        </label><br />
         <label>
-          Confirm Password:
-          <input type={'password'} onKeyUp={(e) => setpassword2(e.currentTarget.value)} />
-        </label><br/><br/>
-        <button className='btn btn-success' type={'submit'}>Submit</button><button className='btn btn-danger' onClick={()=>navigate('/')}>Back</button>
-        <br/><>{ error }</>
+          First Name:
+          <input onKeyUp={(e) => setfirstName(e.currentTarget.value)} required />
+        </label><br />
+        <label>
+          Last Name:
+          <input onKeyUp={(e) => setlast_name(e.currentTarget.value)} required />
+        </label><br /><br />
+        <button className='btn btn-success' type={'submit'}>Submit</button><button className='btn btn-danger' onClick={() => navigate('/')}>Back</button>
+        <br />
       </form>
     </div>
   );

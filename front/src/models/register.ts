@@ -1,5 +1,7 @@
 export default interface IRegisterUser{
     username:string;
-    password1:String;
-    password2:String;
+    email:string;
+    password:string;
+    last_name:string;
+    first_name:string;
 }
