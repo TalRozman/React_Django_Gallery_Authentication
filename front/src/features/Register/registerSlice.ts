@@ -30,7 +30,6 @@ export const registerSlice = createSlice({
     builder
       .addCase(registerAsync.fulfilled, (state, action) => {
         state.status = "success";
-        console.log(state.status)
       })
       .addCase(registerAsync.rejected, (state, action) => {
         state.status = "failure";

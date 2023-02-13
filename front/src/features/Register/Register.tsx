@@ -50,23 +50,23 @@ export const Register = () => {
       <ToastContainer/>
       <form onSubmit={(e) => { handleRegister(); e.preventDefault() }}>
         <label>
-          User name:
+          User name: {" "}
           <input onKeyUp={(e) => setusername(e.currentTarget.value)} required />
         </label><br />
         <label>
-          Email:
+          Email: {" "}  
           <input type={'email'} onKeyUp={(e) => setemail(e.currentTarget.value)} required />
         </label><br />
         <label>
-          Password:
+          Password: {" "}
           <input type={'password'} onKeyUp={(e) => setpassword(e.currentTarget.value)} required />
         </label><br />
         <label>
-          First Name:
+          First Name: {" "}
           <input onKeyUp={(e) => setfirstName(e.currentTarget.value)} required />
         </label><br />
         <label>
-          Last Name:
+          Last Name: {" "}
           <input onKeyUp={(e) => setlast_name(e.currentTarget.value)} required />
         </label><br /><br />
         <button className='btn btn-success' type={'submit'}>Submit</button><button className='btn btn-danger' onClick={() => navigate('/')}>Back</button>
