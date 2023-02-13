@@ -1,13 +1,13 @@
-# Django MySQL - Upload images using React redux typescript template
+# Django MySQL - Upload images using React redux typescript
 
 This project is part of FS python cource.
-It is based on Django for Back, MySQL as DataBase and React redux typescript.
+It is based on Django for Back, SQLite as DataBase and React redux typescript.
 
 ## Tecnologies used - 
     - Back -
         - Python
         - Django
-        - MySQL
+        - SQLite
         - Virtual Environment
         - Pillow package for image upload handling
 
