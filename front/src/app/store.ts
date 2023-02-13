@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import gallerySlice from '../features/gallery/gallerySlice';
 import loginSlice from '../features/Login/loginSlice';
-import profileSlice from '../features/Profile/registerSlice';
+import profileSlice from '../features/Profile/profileSlice';
 import registerSlice from '../features/Register/registerSlice';
 
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import IGallery from '../../models/gallery'
-import { addImageAsync, selectcontent, selectimg, selecttitle, setContent, setTitle } from './gallerySlice'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+import IGallery from '../models/gallery'
+import { addImageAsync, selectcontent, selectimg, selecttitle, setContent, setTitle } from '../features/gallery/gallerySlice'
 import jwtDecode from 'jwt-decode'
 
 const AddImage = () => {
@@ -29,9 +29,8 @@ const AddImage = () => {
     
 
     return (
-        <div style={{display: 'block',marginLeft: 'auto',marginRight: 'auto',width: '40%',textAlign:'center',}}>
-            
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <div
+            style={{display: 'block',marginLeft: 'auto',marginRight: 'auto',width: '40%',textAlign:'center',}}>
             <form onSubmit={(e)=>{handleSubmit();e.preventDefault()}}>
                 <p>
                     <input
@@ -60,8 +59,8 @@ const AddImage = () => {
                     />
                 </p>
                 <button type="submit" className='btn btn-success'>Submit</button>
+                <button onClick={()=>navigate('/showGallery')} className="btn btn-danger">Back</button>
             </form>
-            <button onClick={()=>navigate('/showGallery/')} className="btn btn-danger">Back</button>
         </div>
     )
 }

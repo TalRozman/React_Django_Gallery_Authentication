@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import IRegisterUser from '../../models/register';
-import { registerAsync, restStatus, selectStatus } from './registerSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import IRegisterUser from '../models/register';
+import { registerAsync, restStatus, selectStatus } from '../features/Register/registerSlice';
 import { useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,18 +40,18 @@ export const Register = () => {
       theme: "colored",
     });
     setTimeout(() => {
-      navigate('/')
+      navigate('/login')
       dispatch(restStatus())
     }, 3000);
   }
 
   return (
-    <div style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '40%', textAlign: 'center', padding: '25% 0', }}>
+    <div style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '40%', textAlign: 'center', marginTop: '10%', }}>
       <ToastContainer/>
       <form onSubmit={(e) => { handleRegister(); e.preventDefault() }}>
         <label>
           User name: {" "}
-          <input onKeyUp={(e) => setusername(e.currentTarget.value)} required />
+          <input type={'text'} onKeyUp={(e) => setusername(e.currentTarget.value)} required />
         </label><br />
         <label>
           Email: {" "}  
@@ -63,11 +63,11 @@ export const Register = () => {
         </label><br />
         <label>
           First Name: {" "}
-          <input onKeyUp={(e) => setfirstName(e.currentTarget.value)} required />
+          <input type={'text'} onKeyUp={(e) => setfirstName(e.currentTarget.value)} required />
         </label><br />
         <label>
           Last Name: {" "}
-          <input onKeyUp={(e) => setlast_name(e.currentTarget.value)} required />
+          <input type={'text'} onKeyUp={(e) => setlast_name(e.currentTarget.value)} required />
         </label><br /><br />
         <button className='btn btn-success' type={'submit'}>Submit</button><button className='btn btn-danger' onClick={() => navigate('/')}>Back</button>
         <br />

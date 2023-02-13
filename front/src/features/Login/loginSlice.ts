@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import Iuser from '../../models/user';
+import { resetProfile } from '../Profile/profileSlice';
 import { userLogin } from './loginAPI';
 
 export interface logInState {
@@ -29,7 +30,7 @@ export const loginSlice = createSlice({
     logout: (state) => {
       state.accessToken = "";
       state.logged = false;
-      sessionStorage.removeItem('token')
+      resetProfile()      
     }
   },
   extraReducers: (builder) => {
@@ -48,7 +49,7 @@ export const loginSlice = createSlice({
 export const { logout } = loginSlice.actions;
 
 export const selectToken = (state: RootState) => state.login.accessToken;
-export const selectRefresh = (state: RootState) => state.login.logged;
+export const selectlogged = (state: RootState) => state.login.logged;
 export const selectError = (state: RootState) => state.login.error;
 
 

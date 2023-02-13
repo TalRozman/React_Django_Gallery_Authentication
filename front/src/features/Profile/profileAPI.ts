@@ -25,3 +25,11 @@ export const updProfile = async (obj:{pro: IProfile,token:string}) => {
     }})
   return res.data
 }
+
+export const delProfile = async (obj:{id: number,token:string}) => {
+  const res = await axios.delete(`${MY_SERVER}users/${obj.id}`,{
+    headers:{
+      'Authorization': `Bearer ${obj.token}`
+    }})
+  return res.data
+}

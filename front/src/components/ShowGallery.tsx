@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { MY_SERVER } from '../../env'
-import IGallery from '../../models/gallery'
-import { delImageAsync, getImageAsync, selectcontent, selectGallery,selectrefresh, selecttitle, setContent, setTitle, updImageAsync } from './gallerySlice'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { MY_SERVER } from '../env'
+import IGallery from '../models/gallery'
+import { delImageAsync, getImageAsync, selectcontent, selectGallery,selectrefresh, selecttitle, setContent, setTitle, updImageAsync } from '../features/gallery/gallerySlice'
 import jwtDecode from 'jwt-decode'
-import { logout } from '../Login/loginSlice'
 
 const MyGallery = () => {
     const dispath = useAppDispatch()
@@ -26,10 +25,7 @@ const MyGallery = () => {
     const uName = jwtDecode<any>(token)
     return (
         <div style={{display: 'block',marginLeft: 'auto',marginRight: 'auto',width: '40%',textAlign:'center',}}>
-            <h1>Wellcome {uName.username}!</h1><br/>
-            <button className='btn btn-danger' onClick={()=> {dispath(logout());navigate('/')}}>Logout</button>
-            <button onClick={()=>navigate('/addImage/')} className="btn btn-success">Add Pictures</button>
-            <button className='btn btn-primary' onClick={()=>navigate('/profile/')}>My Profile</button><br/><br/><br/>
+            <br/><br/><br/><br/>
             {!isUpdate ?
                 gallery.length > 0 ? (gallery?.map((pic1, i) =>
                     <div className="card" style={{ width: "18rem", display: 'inline' }} key={i}>

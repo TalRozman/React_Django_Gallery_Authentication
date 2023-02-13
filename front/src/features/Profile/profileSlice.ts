@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import IProfile from '../../models/profile';
-import { addProfile, getProfile, updProfile } from './profileAPI';
+import { logout } from '../Login/loginSlice';
+import { addProfile, delProfile, getProfile, updProfile } from './profileAPI';
 
 
 export interface profileState {
@@ -35,11 +36,22 @@ export const updProfileAsync = createAsyncThunk(
     return response;
   }
 );
+export const delProfileAsync = createAsyncThunk(
+  'profile/delProfile',
+  async (obj: { id: number, token: string }) => {
+    const response = await delProfile(obj);
+    return response;
+  }
+);
 
 export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
+    resetProfile:(state)=>
+    {
+      state.profiles = [];
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -52,10 +64,14 @@ export const profileSlice = createSlice({
       .addCase(addProfileAsync.fulfilled, (state, action) => {
         state.refresh = !state.refresh
       })
+      .addCase(delProfileAsync.fulfilled, (state, action) => {
+        state.refresh = !state.refresh
+        logout()
+      })
   }
 });
 
-// export const {  } = profileSlice.actions;
+export const { resetProfile } = profileSlice.actions;
 export const selectProfile = (state: RootState) => state.profile.profiles;
 export const selectProfileRefresh = (state: RootState) => state.profile.refresh;
 
