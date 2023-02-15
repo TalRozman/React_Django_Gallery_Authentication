@@ -2,7 +2,9 @@ import React from 'react'
 
 const Fruits = () => {
   return (
-    <div>Fruits</div>
+    <div>
+      <h1 style={{textAlign:'center'}}>Fruits</h1>
+    </div>
   )
 }
 

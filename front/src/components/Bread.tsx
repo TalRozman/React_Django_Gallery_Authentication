@@ -2,7 +2,9 @@ import React from 'react'
 
 const Bread = () => {
   return (
-    <div>Bread</div>
+    <div>
+      <h1 style={{textAlign:'center'}}>Bread</h1>
+    </div>
   )
 }
 

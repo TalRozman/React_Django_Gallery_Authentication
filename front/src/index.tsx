@@ -24,7 +24,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />}>
-          <Route index element={<h1 style={{textAlign:'center'}}>My Gallery</h1>}/>
+          <Route index element={<><br /><br /><br /><br /><h1 style={{textAlign:'center'}}>My Gallery</h1></>}/>
           <Route path='login' element={<Login />} />
           <Route path='showGallery' element={<ShowGallery />} />
           <Route path='addImage' element={<AddImage />} />

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import IGallery from '../models/gallery'
-import { addImageAsync, selectcontent, selectimg, selecttitle, setContent, setTitle } from '../features/gallery/gallerySlice'
+import { addImageAsync, selectcontent, selecttitle, setContent, setTitle } from '../features/gallery/gallerySlice'
 import jwtDecode from 'jwt-decode'
 
 const AddImage = () => {
@@ -59,7 +59,6 @@ const AddImage = () => {
                     />
                 </p>
                 <button type="submit" className='btn btn-success'>Submit</button>
-                <button onClick={()=>navigate('/showGallery')} className="btn btn-danger">Back</button>
             </form>
         </div>
     )

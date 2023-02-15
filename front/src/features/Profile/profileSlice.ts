@@ -17,28 +17,28 @@ const initialState: profileState = {
 
 export const getProfileAsync = createAsyncThunk(
   'profile/getProfile',
-  async (obj: { id:number, token: string }) => {
+  async (obj: { id:number, accessToken: string }) => {
     const response = await getProfile(obj);
     return response;
   }
 );
 export const addProfileAsync = createAsyncThunk(
   'profile/addProfile',
-  async (obj: { pro: IProfile, token: string }) => {
+  async (obj: { pro: IProfile, accessToken: string }) => {
     const response = await addProfile(obj);
     return response;
   }
 );
 export const updProfileAsync = createAsyncThunk(
   'profile/updProfile',
-  async (obj: { pro: IProfile, token: string }) => {
+  async (obj: { pro: IProfile, accessToken: string }) => {
     const response = await updProfile(obj);
     return response;
   }
 );
 export const delProfileAsync = createAsyncThunk(
   'profile/delProfile',
-  async (obj: { id: number, token: string }) => {
+  async (obj: { id: number, accessToken: string }) => {
     const response = await delProfile(obj);
     return response;
   }

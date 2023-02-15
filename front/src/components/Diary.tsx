@@ -3,7 +3,7 @@ import React from 'react'
 const Diary = () => {
   return (
     <div>
-        Diary
+        <h1 style={{textAlign:'center'}}>Diary</h1>
     </div>
   )
 }

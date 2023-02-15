@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { MY_SERVER } from '../env'
 import IGallery from '../models/gallery'
@@ -14,7 +13,6 @@ const MyGallery = () => {
     const content = useAppSelector(selectcontent)
     const [image, setImg] = useState<File|undefined>(undefined)
     const token = String(sessionStorage.getItem('token'))
-    const navigate = useNavigate()
 
     useEffect(() => {
         dispath(getImageAsync(token))
